@@ -28,12 +28,12 @@ class AbcTest2 {
 class AbcTest3 {
 //	★중요 메서드나 메서드 인자에 사용된다
 	public void prn() {
-		new Abc() {
+		new Abc() {  //일회용 객체생성
 			@Override
 			public void printData() {
 				System.out.println("data3 : " + data);
 			}
-		}.printData();;  //★중요 이부분은 메서드를 메서드가 호출하는 방식
+		}.printData();  //★중요 이부분은 메서드를 메서드가 호출하는 방식
 	}
 }
 

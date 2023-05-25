@@ -26,7 +26,6 @@ public class Ex01_Exception {
 			System.out.println(e);
 		}
 		
-		
 		System.out.println("수고하셨습니다.");
 		
 	}

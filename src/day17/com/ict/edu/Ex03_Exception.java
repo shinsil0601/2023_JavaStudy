@@ -13,9 +13,9 @@ import java.util.Scanner;
 //			  예외 발생시 수행할 문장;
 //			} catch(예상되는_예외객체2 변수명){
 //			  예외 발생시 수행할 문장;
-//			} catch(예상되는_예외객체3 변수명){
-//			  예외 발생시 수행할 문장;
-//			} 
+//			}finally{
+//			반드시 실행 해야 되는 문장;
+//			}
 	
 public class Ex03_Exception {
 	public static void main(String[] args) {
