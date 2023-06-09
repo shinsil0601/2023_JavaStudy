@@ -10,7 +10,6 @@ import java.io.FileOutputStream;
 //	기본자료형의 데이터를 주고 받을때 사용
 //	** 반드시 입력순서와 출력순서를 맞춰야 한다.**
 //	기본생성자가 없어서 BufferedStream 처럼 FileStream를 이용해야한다.
-
 public class Ex01_dataStream {
 	public static void main(String[] args) {
 		String pathname = "D:/KSS/test03.txt";

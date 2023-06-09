@@ -8,11 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.nio.BufferOverflowException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 
 public class Ex06_File_open extends JFrame{
@@ -31,11 +27,11 @@ public class Ex06_File_open extends JFrame{
 	JScrollPane jsp;
 	JButton jb;
 	public Ex06_File_open() {
-		super("저장하기");
+		super("불러오기");
 		
 		jp = new JPanel();
 		jtf = new JTextField(15);
-		jb = new JButton("SAVE");
+		jb = new JButton("불러오기");
 		
 		jp.add(new JLabel("파일 경로 : "));
 		jp.add(jtf);
@@ -58,47 +54,49 @@ public class Ex06_File_open extends JFrame{
 		jb.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				f_save();
+				f_open();
 			}
 		});
 		jtf.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				f_save();
+				f_open();
 			}
 		});
 		jtf.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				FileDialog fd = new FileDialog((Frame)getParent(), "저장하기", FileDialog.SAVE);
+				FileDialog fd = new FileDialog((Frame)getParent(), "불러오기", FileDialog.LOAD);
 				fd.setVisible(true);
 				String msg = fd.getDirectory()+fd.getFile();
 				if (! msg.equals("nullnull")) {
 					jtf.setText(msg);
+					f_open();
 				}
 			}
 		});
 	}
 	// jb, jtf의 같은 값 실행을 위해 메서드를 만들어준다.
-	private void f_save() {
+	private void f_open() {
 		String pathname = jtf.getText().trim();
 		if (pathname.length() > 0) {  // 입력값이 있을때만 실행함
 			File file = new File(pathname);
-			FileOutputStream fos = null;
-			BufferedOutputStream bos = null;
+			FileInputStream fis = null;
+			BufferedInputStream bis = null;
 			try {
-				fos = new FileOutputStream(file, true);
-				bos = new BufferedOutputStream(fos);
+				fis = new FileInputStream(file);
+				bis = new BufferedInputStream(fis);
 				
-				String msg = jta.getText().trim();
-				bos.write(msg.getBytes());
-				bos.flush();
+				byte[] b = new byte[(int)file.length()];
+				bis.read(b);
+				String msg = new String(b).trim();
+				jta.setText(msg);  // 이어쓰려면 어팬드
 			} catch (Exception e) {
 			}finally {
 				try {
-					bos.close();
-					fos.close();
+					bis.close();
+					fis.close();
 				} catch (Exception e2) {
 				}
 			}

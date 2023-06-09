@@ -62,18 +62,7 @@ public class Ex02_File {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-			
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 	}
 }
